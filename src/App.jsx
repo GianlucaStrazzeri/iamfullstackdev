@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from './Home.jsx'
 import ItemDetailPage from "./ItemDetailPage.jsx";
+import InputCreate from "./InputCreate.jsx";
 
 const App = () => {
   const [data, setData] = useState(null)
@@ -26,6 +27,7 @@ useEffect(() => {
       <div>
         <nav>
           <Link to="/">Inicio</Link>
+          <Link to="/create" element={<InputCreate/>}>Crear nueva Tarea</Link>
         </nav>
         {data === null 
         ? (<div>cargando...</div>) 
