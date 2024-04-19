@@ -8,6 +8,7 @@ const input =()=>{
 //como react actualiza de forma automatica el envio del input, manejo el cambio seleccionando el evento
 // imposto el valor del input targetizzando el valor del input
 const urlApi=("http://localhost:3000")
+//creo un trigger entre il front y el back para escuchar el localhost
 fetch(urlApi, {
   method: 'POST', // Método HTTP
   headers: {
