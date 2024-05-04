@@ -1,46 +1,52 @@
-import  { useState } from 'react';//importo los estados de react
+import { useState } from 'react';
 
+function InputCreate() {
+  const [title, setTitle] = useState(""); // Estado para guardar el título
+  const [response, setResponse] = useState('Listo para enviar')
 
-const input =()=>{
-    const [inputValue, setInputValue] = useState('');//el valor inicial de input es ""
-    const handleChange = (e) => {
-        setInputValue(e.target.value);
-//como react actualiza de forma automatica el envio del input, manejo el cambio seleccionando el evento
-// imposto el valor del input targetizzando el valor del input
-const urlApi=("http://localhost:3000")
-//creo un trigger entre il front y el back para escuchar el localhost
-fetch(urlApi, {
-  method: 'POST', // Método HTTP
-  headers: {
-    'Content-Type': 'application/json', // Indicamos que el contenido es JSON
-  },
-  body: JSON.stringify(payload), // Convertimos el payload de JS a JSON
-})
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
+    const urlApiCreate = "http://localhost:3000/create"; // URL del endpoint POST
+    const payload = { title }; // Payload que se enviará al backend
 
-      };
-    return (
-<>
-<div className="Input">
-      <h1>Input Task</h1>
+    try {
+      const response = await fetch(urlApiCreate, {
+        method: 'POST', // Método HTTP
+        headers: {
+          'Content-Type': 'application/json', // Indicamos que el contenido es JSON
+        },
+        body: JSON.stringify(payload), // Convertimos el payload de JS a JSON
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Success:', data);
+        setResponse(`Success: ${data.title}`)
+        setTitle(""); // Limpiar el input después de enviar
+      } else {
+        throw new Error('Something went wrong');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={inputValue}
-        onChange={handleChange}
-        placeholder="Enter a Task"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)} // Actualiza el estado cada vez que se cambia el valor del input
+        placeholder="Enter title"
+        required
       />
-      <p>El valor del input es: {inputValue}</p>
-    </div>
-        
-    <button type="submit">Enviar</button>
-</>
-    )
+      <button type="submit">Enviar</button>
+    </form>
+    <h2>{response}</h2>
+    </>
+  );
 }
 
-export default input;
-
-
-
-
-
- 
+export default InputCreate;
