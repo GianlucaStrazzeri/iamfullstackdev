@@ -7,7 +7,7 @@ function InputCreate() {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
-    const urlApiCreate = "http://localhost:3000/create"; // URL del endpoint POST
+    const urlApiCreate = "http://localhost:3001/create"; // URL del endpoint POST
     const payload = { title }; // Payload que se enviará al backend
 
     try {

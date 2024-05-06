@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from './Home.jsx'
-import ItemDetailPage from "./ItemDetailPage.jsx";
+import PatientDetail from "./PatientDetail.jsx";
 import InputCreate from "./InputCreate.jsx";
 
 const App = () => {
   const [data, setData] = useState(null)
-  const urlApi = "http://localhost:3000"
+  const urlApi = "http://localhost:3001"
 
 const fetchData = async () => {
   try {
@@ -36,7 +36,7 @@ useEffect(() => {
             <Route path="/" element={<Home data={data} />} />
             <Route path="/create" element={<InputCreate />} />
             {data.map(item => (
-              <Route key={item._id} path={`/${item._id}`} element={<ItemDetailPage item={item}/>} />
+              <Route key={item._id} path={`/${item._id}`} element={<PatientDetail item={item}/>} />
             ))
             }
           </Routes>

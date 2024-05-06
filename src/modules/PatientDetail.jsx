@@ -1,4 +1,4 @@
-const ItemDetailPage = ({item}) => {
+const PatientDetail = ({item}) => {
 
   return (
     <>
@@ -9,4 +9,4 @@ const ItemDetailPage = ({item}) => {
   );
 };
 
-export default ItemDetailPage;
+export default PatientDetail;
